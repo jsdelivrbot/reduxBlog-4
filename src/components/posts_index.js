@@ -14,8 +14,10 @@ class PostsIndex extends Component {
     return this.props.posts.map((post) => {
       return (
           <li className="list-group-item" key={post.id}>
-            <span className="pull-xs-right">{post.categories}</span>
-            <strong>{post.title}</strong>
+            <Link to={`posts/${post.id}`}>
+              <span className="pull-xs-right">{post.categories}</span>
+              <strong>{post.title}</strong>
+            </Link>
           </li>
       );
     });
@@ -43,10 +45,10 @@ function mapStateToProps(state) {
 }
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({ fetchPosts }, dispatch);
+  return bindActionCreators({ fetchPosts }, dispatch); //dispatch the fetchPosts function (action creator) through all the reducers
 };
 
-export default connect (mapStateToProps, mapDispatchToProps)(PostsIndex);
+export default connect (mapStateToProps, mapDispatchToProps)(PostsIndex); // give access through props to: (1) posts.all and (2) fetchPosts in this component (PostsIndex)
 
 // A shorthand to remove the mapDispatchToProps method
 // export default connect (null, { fetchPosts })(PostsIndex);
